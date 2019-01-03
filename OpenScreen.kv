@@ -1,0 +1,286 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManagement:
+    transition: FadeTransition()
+    MainScreen:
+    AutoScreen:
+    SizeSelect:
+
+
+<MainScreen>
+    name: 'Open Screen'
+    FloatLayout:
+        Button:
+            color: 0,1,0,1
+            on_release: app.root.current = 'Default Screen'
+            text: 'Default Room Size'
+            bold: True
+            font_size: 30
+            size_hint: 1,0.5
+            pos_hint: {'left':1, 'top':1}
+
+        Button:
+            color: 0,1,0,1
+            on_release: app.root.current = "Size Select"
+            text: 'Choose Room Size'
+            bold: True
+            font_size: 30
+            size_hint: 1,0.5
+            pos_hint: {'left':1, 'bottom':1}
+
+<AutoScreen>
+    name: 'Default Screen'
+    BoxLayout:
+        orientation: 'horizontal'
+        BoxLayout:
+            size_hint_x: 0.9
+            FloatLayout:
+
+                Label:
+                    color: 0,1,1,1
+                    text: 'Visited Once:'
+                    size_hint: 0.1,0.1
+                    font_size: 15
+                    pos_hint: {'x':0.2, 'top':1}
+
+                Label:
+                    color: 0,0.5,0.8,1
+                    text: 'Visited Twice:'
+                    size_hint: 0.1,0.1
+                    font_size: 15
+                    pos_hint: {'x':0.5, 'top':1}
+
+                Label:
+                    color: 0.5,0.5,0.5,1
+                    text: 'Obstacle:'
+                    size_hint: 0.1,0.1
+                    font_size: 15
+                    pos_hint: {'x':0.8, 'top':1}
+
+
+        BoxLayout:
+            canvas:
+                Color:
+                    rgb: [0.5,0.5,0.5,1]
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint_x: 0.1
+            FloatLayout:
+                Button:
+                    color: 0,1,0,1
+                    on_release: app.root.current = 'Open Screen'
+                    on_release: root.clear_room()
+                    on_release: root.stop()
+                    text: 'Back'
+                    bold: True
+                    font_size: 15
+                    size_hint: 1,0.1
+                    pos_hint: {'right':1, 'bottom':1}
+
+                Button:
+                    color: 0,1,0,1
+                    on_release: root.set_room()
+                    on_release: root.set_room_canvas()
+                    text: 'Set Room'
+                    bold: True
+                    font_size: 15
+                    size_hint: 1,0.1
+                    pos_hint: {'right':1, 'y':0.5}
+
+                Button:
+                    color: 0,1,0,1
+                    on_press: root.go()
+                    text: 'Start'
+                    bold: True
+                    font_size: 15
+                    size_hint: 1,0.1
+                    pos_hint: {'right':1, 'top':1}
+
+<SizeSelect>
+    name: 'Size Select'
+    height_def: Height
+    width_def: Width
+    obs_row_def: Obs_Row
+    obs_col_def: Obs_Col
+    obs_height_def: Obs_Hei
+    obs_width_def: Obs_Wid
+    canvas_size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            canvas:
+                Color:
+                    rgb: [0.5,0.5,0.5,1]
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            size_hint_y: 0.2
+            orientation: 'horizontal'
+            BoxLayout:
+                FloatLayout:
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Room Height:'
+                        size_hint: 0.3,0.4
+                        font_size: 15
+                        pos_hint: {'left':1, 'top':1}
+
+                    TextInput:
+                        id: Height
+                        size_hint: 0.1,0.3
+                        font_size: 15
+                        pos_hint: {'x':0.3, 'top':1}
+
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Room Width:'
+                        size_hint: 0.3,0.4
+                        font_size: 15
+                        pos_hint: {'x':0.4, 'top':1}
+
+                    TextInput:
+                        id: Width
+                        size_hint: 0.1,0.3
+                        font_size: 15
+                        pos_hint: {'x':0.70, 'top':1}
+
+
+                    Button:
+                        color: 0,1,0,1
+                        on_release: root.set_room_canvas()
+                        on_release: root.set_room()
+                        text: 'Create Room'
+                        bold: True
+                        font_size: 12
+                        size_hint: 0.25,0.3
+                        pos_hint: {'x':0.3, 'y':0}
+
+            BoxLayout:
+                FloatLayout:
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Obstacle Row:'
+                        size_hint: 0.3,0.25
+                        font_size: 15
+                        pos_hint: {'x':0, 'top':1}
+
+                    TextInput:
+                        id: Obs_Row
+                        size_hint: 0.1,0.3
+                        font_size: 15
+                        pos_hint: {'x':0.3, 'top':1}
+
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Obstacle Column:'
+                        size_hint: 0.3,0.25
+                        font_size: 15
+                        pos_hint: {'x':0, 'y':0.35}
+
+                    TextInput:
+                        id: Obs_Col
+                        size_hint: 0.1,0.3
+                        font_size: 15
+                        pos_hint: {'x':0.3, 'y':0.35}
+
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Obstacle Height:'
+                        size_hint: 0.3, 0.25
+                        font_size: 15
+                        pos_hint: {'x':0.5, 'top': 1}
+
+                    TextInput:
+                        id: Obs_Hei
+                        size_hint: 0.1,0.3
+                        font_size: 15
+                        pos_hint: {'x':0.80, 'top':1}
+
+                    Label:
+                        color: 0,0,0,1
+                        text: 'Obstacle Width:'
+                        size_hint: 0.3,0.3
+                        font_size: 15
+                        pos_hint: {'x':0.5, 'y':0.35}
+
+                    TextInput:
+                        id: Obs_Wid
+                        size_hint: 0.1,0.3
+                        font_size: 15
+                        pos_hint: {'x':0.8, 'y':0.35}
+
+                    Button:
+                        color: 0,1,0,4
+                        on_release: root.obstacle_list()
+                        text: 'Add Obstacle'
+                        bold: True
+                        font_size: 12
+                        size_hint: 0.25,0.3
+                        pos_hint: {'x':0.4,  'y':0}
+
+        BoxLayout:
+            BoxLayout:
+                FloatLayout:
+                    FloatLayout:
+
+                        Label:
+                            color: 0,1,1,1
+                            text: 'Visited Once:'
+                            size_hint: 0.1,0.1
+                            font_size: 15
+                            pos_hint: {'x':0.8, 'y':0.6}
+
+                        Label:
+                            color: 0,0.5,0.8,1
+                            text: 'Visited Twice:'
+                            size_hint: 0.1,0.1
+                            font_size: 15
+                            pos_hint: {'x':0.8, 'y':0.4}
+
+                        Label:
+                            color: 0.5,0.5,0.5,1
+                            text: 'Obstacle:'
+                            size_hint: 0.1,0.1
+                            font_size: 15
+                            pos_hint: {'x':0.8, 'y':0.2}
+
+            BoxLayout:
+                canvas:
+                    Color:
+                        rgb: [0.5,0.5,0.5,1]
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                size_hint_x: 0.1
+                FloatLayout:
+
+                    Button:
+                        color: 0,1,0,1
+                        on_release: app.root.current = 'Open Screen'
+                        text: 'Back'
+                        bold: True
+                        font_size: 15
+                        size_hint: 1,0.1
+                        pos_hint: {'right':1, 'bottom':1}
+
+
+                    Button:
+                        color: 0,1,0,1
+                        on_release: root.go()
+                        text: 'Start'
+                        bold: True
+                        font_size: 15
+                        size_hint: 1,0.1
+                        pos_hint: {'right':1, 'y':0.1}
+
+
+<Robot>
+    bot_pos: Bot_Pos
+    SnakeHead:
+        id: Bot_Pos
+        width: root.width
+        height: root.height
+
+
+
